@@ -3,6 +3,13 @@ import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query
 import { fetchNotes } from "@/lib/api"
 import Notes from './Notes.client'
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Edit Profile',
+    description: 'Edit your user details and settings',
+};
+
 type Props = {
     params: Promise<{ slug: string[] }>;
 };
