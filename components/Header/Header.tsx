@@ -18,6 +18,9 @@ export default function Header() {
                     <li>
                         <TagsMenu />
                     </li>
+                    <li>
+                        <Link href="/notes/action/create">Creact</Link>
+                    </li>
                 </ul>
             </nav>
         </header>
