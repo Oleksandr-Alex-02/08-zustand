@@ -18,7 +18,19 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "NOTEHUB",
-  description: "Зберігай думки, ідеї та завдання в одному місці",
+  description: "Keep thoughts, ideas and tasks in one place",
+  openGraph: {
+    title: `NOTEHUB`,
+    description: `Keep thoughts, ideas and tasks in one place`,
+    url: `https://notehub.com/notes`,
+    images: [
+      {
+        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+        width: 1200,
+        height: 630,
+        alt: `NOTEHUB`,
+      },],
+  }
 };
 
 export default function RootLayout({
