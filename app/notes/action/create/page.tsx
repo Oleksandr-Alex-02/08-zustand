@@ -1,4 +1,5 @@
 
+import NoteForm from '@/components/NoteForm/NoteForm'
 import css from './CreateNote.module.css'
 
 export default function CreateNotePage() {
@@ -7,8 +8,8 @@ export default function CreateNotePage() {
         <main className={css.main}>
             <div className={css.container}>
                 <h1 className={css.title}>Create note</h1>
-                {/* NoteForm component */}
             </div>
+            <NoteForm />
         </main>
 
     )

@@ -15,6 +15,7 @@ export default function SidebarNotes() {
 
     return (
         <ul className={css.menuList}>
+            <Link href="/notes/action/create">Creact</Link>
             {categories.map(category => (
                 <li key={category} className={css.menuItem}>
                     <Link
