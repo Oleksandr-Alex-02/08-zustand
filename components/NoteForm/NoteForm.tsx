@@ -122,7 +122,6 @@
 
 /////////////////
 
-
 'use client';
 
 import css from './NoteForm.module.css'
@@ -165,17 +164,17 @@ export default function NoteForm({ categories }: Props) {
             <div className={css.formGroup}>
                 <label>
                     Title
-                    <input type="text" name="title" />
+                    <input className={css.input} type="text" name="title" />
                 </label>
             </div>
             <div className={css.formGroup}>
-                <label>
+                <label className={css.textarea}>
                     Content
                     <textarea name="content"></textarea>
                 </label>
             </div>
             <div className={css.formGroup}>
-                <label>
+                <label className={css.select}>
                     Category
                     <select name="categoryId">
                         {categories.map((category) => (
@@ -186,9 +185,9 @@ export default function NoteForm({ categories }: Props) {
                     </select>
                 </label>
             </div>
-            <div>
-                <button type="submit">Create</button>
-                <button type="button" onClick={handleCancel}>
+            <div className={css.actions}>
+                <button className={css.cancelButton} type="submit">Create</button>
+                <button className={css.submitButton} type="button" onClick={handleCancel}>
                     Cancel
                 </button>
             </div>
