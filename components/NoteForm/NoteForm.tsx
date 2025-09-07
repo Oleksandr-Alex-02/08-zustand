@@ -123,9 +123,9 @@
 /////////////////
 
 
-// components/NoteForm/NoteForm.tsx
-
 'use client';
+
+import css from './NoteForm.module.css'
 
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
@@ -161,28 +161,31 @@ export default function NoteForm({ categories }: Props) {
     };
 
     return (
-        <form action={handleSubmit}>
-            <label>
-                Title
-                <input type="text" name="title" />
-            </label>
-
-            <label>
-                Content
-                <textarea name="content"></textarea>
-            </label>
-
-            <label>
-                Category
-                <select name="categoryId">
-                    {categories.map((category) => (
-                        <option key={category.id} value={category.id}>
-                            {category.tag}
-                        </option>
-                    ))}
-                </select>
-            </label>
-
+        <form className={css.form} action={handleSubmit}>
+            <div className={css.formGroup}>
+                <label>
+                    Title
+                    <input type="text" name="title" />
+                </label>
+            </div>
+            <div className={css.formGroup}>
+                <label>
+                    Content
+                    <textarea name="content"></textarea>
+                </label>
+            </div>
+            <div className={css.formGroup}>
+                <label>
+                    Category
+                    <select name="categoryId">
+                        {categories.map((category) => (
+                            <option key={category.id} value={category.id}>
+                                {category.tag}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+            </div>
             <div>
                 <button type="submit">Create</button>
                 <button type="button" onClick={handleCancel}>
