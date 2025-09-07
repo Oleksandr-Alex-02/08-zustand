@@ -13,14 +13,14 @@ export const fetchNotes = async (
     currentPage: number,
     searchQuery: string,
     perPage?: number,
-    tag?: string
+    // tag?: string
 ): Promise<NoteData> => {
     const response = await axios.get<NoteData>("/notes", {
         params: {
             search: searchQuery,
             page: currentPage,
             perPage,
-            tag,
+            // tag,
         },
         headers: {
             accept: "application/json",
@@ -30,7 +30,7 @@ export const fetchNotes = async (
 
     return response.data;
 };
-
+// Нотатка по ID
 export const getIdNotes = async (noteId: string) => {
     const res = await axios.get<Note>(
         `/notes/${noteId}`, {
@@ -42,7 +42,7 @@ export const getIdNotes = async (noteId: string) => {
     );
     return res.data;
 }
-
+//Видалення нотатки
 export const deleteNote = async (noteId: string) => {
     const res = await axios.delete<Note>(
         `/notes/${noteId}`, {
@@ -54,7 +54,7 @@ export const deleteNote = async (noteId: string) => {
     );
     return res.data;
 }
-
+// Нова нотатка
 export const createNote = async (noteData: NoteFormType) => {
     const res = await axios.post<Note>(
         `/notes`, noteData, {
@@ -66,6 +66,22 @@ export const createNote = async (noteData: NoteFormType) => {
     );
     return res.data;
 }
+// Фільтрація за категоріями
+export const getCategories = async (
+    tag?: string
+): Promise<Note[]> => {
+    const res = await axios.get<NoteData>('/notes', {
+        params: {
+            tag,
+        },
+        headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${NOTEHUB_TOKEN}`,
+        }
+    });
+    return res.data.notes;
+};
+
 
 // interface NoteUpdate {
 //     id: string;

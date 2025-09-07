@@ -122,33 +122,42 @@
 
 /////////////////
 
+
+// components/NoteForm/NoteForm.tsx
+
 'use client';
 
+import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-// import { Category } from '@/lib/api';
+import { createNote } from '@/lib/api';
+import { Note } from '@/types/note';
 
-// interface Category {
-//     all: "All",
-//     work: "Work",
-//     persona: "Personal",
-//     todo: "Todo",
-//     meeting: "Meeting",
-//     shopping: "Shopping",
-// }
+type Props = {
+    categories: Note[];
+};
 
+export type NewNoteData = {
+    tag: string;
+    title: string;
+    content: string;
+    categoryId: string;
+};
 
-// type Props = {
-//     categories: Category[];
-// };
-
-export default function NoteForm() {
+export default function NoteForm({ categories }: Props) {
     const router = useRouter();
+
+    const { mutate } = useMutation({
+        mutationFn: createNote,
+        onSuccess: () => {
+            router.push('/notes/filter/all');
+        },
+    });
 
     const handleCancel = () => router.push('/notes/filter/all');
 
     const handleSubmit = (formData: FormData) => {
-        const values = Object.fromEntries(formData);
-        console.log(values);
+        const values = Object.fromEntries(formData) as NewNoteData;
+        mutate(values);
     };
 
     return (
@@ -165,19 +174,21 @@ export default function NoteForm() {
 
             <label>
                 Category
-                <select name="category">
-                    <option value="Todo">Todo</option>
-                    <option value="Work">Work</option>
-                    <option value="Personal">Personal</option>
-                    <option value="Meeting">Meeting</option>
-                    <option value="Shopping">Shopping</option>
+                <select name="categoryId">
+                    {categories.map((category) => (
+                        <option key={category.id} value={category.id}>
+                            {category.tag}
+                        </option>
+                    ))}
                 </select>
             </label>
 
             <div>
                 <button type="submit">Create</button>
-                <button type="button" onClick={handleCancel}>Cancel</button>
+                <button type="button" onClick={handleCancel}>
+                    Cancel
+                </button>
             </div>
         </form>
     );
-};
+}
