@@ -14,18 +14,22 @@ export const categories = [
 export default function SidebarNotes() {
 
     return (
-        <ul className={css.menuList}>
-            <Link href="/notes/action/create">Creact</Link>
-            {categories.map(category => (
-                <li key={category} className={css.menuItem}>
-                    <Link
-                        href={`/notes/filter/${category}`}
-                        scroll={false}
-                        className={css.menuLink}>
-                        {category}
-                    </Link>
+        <div>
+            <ul className={css.menuList}>
+                <li className={css.menuItem}>
+                    <Link className={css.menuLink} href="/notes/action/create">Creact</Link>
                 </li>
-            ))}
-        </ul>
+                {categories.map(category => (
+                    <li key={category} className={css.menuItem}>
+                        <Link
+                            href={`/notes/filter/${category}`}
+                            scroll={false}
+                            className={css.menuLink}>
+                            {category}
+                        </Link>
+                    </li>
+                ))}
+            </ul>
+        </div>
     )
 }
