@@ -15,5 +15,3 @@ export default function LayoutNotes({
         </section>
     )
 }
-
-// Layout for notes filter page (e.g., /notes/filter/[tag])

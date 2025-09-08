@@ -11,6 +11,7 @@ type NoteDetailsProps = {
 export async function generateMetadata({ params }: NoteDetailsProps) {
     const { id } = await params
     const note = await getIdNotes(id)
+
     return {
         title: `Note: ${note.title}`,
         description: note.content.slice(0, 30),
