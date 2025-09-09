@@ -1,6 +1,6 @@
 
 
-import NoteForm from './FormNote';
+import NoteForm from './CreateNote';
 
 export default async function CreateNote() {
 

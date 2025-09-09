@@ -12,8 +12,8 @@ import { useDebouncedCallback } from "use-debounce";
 
 import NoteList from "@/components/NoteList/NoteList";
 import Pagination from "@/components/Pagination/Pagination";
-import Modal from "@/components/Modal/Modal";
-import NoteForm from "@/components/NoteForm/NoteForm";
+// import Modal from "@/components/Modal/Modal";
+// import NoteForm from "@/components/NoteForm/NoteForm";
 import SearchBox from "@/components/SearchBox/SearchBox";
 
 interface AppProps {
@@ -33,9 +33,9 @@ export default function App({ searchParams }: AppProps) {
     // const router = useRouter();
     // const isModalOpen = searchParam.get('modal') === 'true';
 
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
+    // const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    // const openModal = () => setIsModalOpen(true);
+    // const closeModal = () => setIsModalOpen(false);
 
     // const openModal = () => {
     //     const params = new URLSearchParams(searchParam.toString());
@@ -60,7 +60,7 @@ export default function App({ searchParams }: AppProps) {
 
     const { data, isLoading, isError } = useQuery({
         queryKey: [name, searchQuery, currentPage, tag],
-        queryFn: () => fetchNotes(currentPage, searchQuery, perPage, tag),
+        queryFn: () => fetchNotes(currentPage, searchQuery, perPage),
         placeholderData: keepPreviousData,
         refetchOnMount: false,
     });
@@ -84,20 +84,20 @@ export default function App({ searchParams }: AppProps) {
                         onPageChange={setCurrentPage}
                     />
                 )}
-                <button className={css.button} onClick={openModal}>
+                {/* <button className={css.button} onClick={openModal}>
                     Create note +
-                </button>
+                </button> */}
             </header>
 
             {searchQuery && isLoading && !data && <>Loading notes...</>}
             {searchQuery && isError && <>Error occurred</>}
             {data && data.notes.length > 0 && <NoteList notes={data.notes} />}
 
-            {isModalOpen && (
+            {/* {isModalOpen && (
                 <Modal onClose={closeModal}>
                     <NoteForm onSuccess={closeModal} />
                 </Modal>
-            )}
+            )} */}
         </div>
     );
 }

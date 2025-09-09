@@ -56,7 +56,7 @@ export const deleteNote = async (noteId: string) => {
 }
 // Нова нотатка
 export const createNote = async (noteData: NoteFormType) => {
-    const res = await axios.post<Note>(
+    const res = await axios.post<NoteFormType>(
         `/notes`, noteData, {
         headers: {
             accept: "application/json",
