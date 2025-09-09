@@ -43,7 +43,7 @@ export default async function App({ params }: Props) {
 
     await queryClient.prefetchQuery({
         queryKey: [name, search, initPage, tag],
-        queryFn: () => fetchNotes(initPage, search, perPage, tag)
+        queryFn: () => fetchNotes(initPage, search, perPage)
     })
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
