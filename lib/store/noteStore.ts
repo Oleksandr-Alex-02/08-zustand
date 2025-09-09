@@ -37,7 +37,7 @@ export const useStore = create<DraftStore>()(
         }),
         {
             name: "draft",
-            partialize: (state) => ({ ...state.draft }),
+            partialize: (state) => ({ draft: state.draft }),
         }
     )
 );
