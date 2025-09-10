@@ -5,12 +5,12 @@ import css from './page.module.css'
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-// import { Metadata } from 'next';
+import { Metadata } from 'next';
 
-// export const metadata: Metadata = {
-//     title: "NOTEHUB",
-//     description: "Sorry, such page does not exist.",
-// };
+export const metadata: Metadata = {
+    title: "NOTEHUB",
+    description: "Sorry, such page does not exist.",
+};
 
 const NotFound = () => {
     const router = useRouter();
