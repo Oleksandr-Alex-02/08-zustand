@@ -1,14 +1,32 @@
 
+import { Metadata } from 'next';
 
-import NoteForm from './CreateNote';
+import CreateNoteClient from './CreateNote';
+
+export const metadata: Metadata = {
+    title: "CreateNote",
+    description: "Create your note with NOTEHUB",
+    openGraph: {
+        title: `CreateNote`,
+        description: `Create your note with NOTEHUB`,
+        url: `https://notehub.com/notes`,
+        images: [
+            {
+                url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+                width: 1200,
+                height: 630,
+                alt: `NOTEHUB`,
+            },],
+    }
+};
 
 export default async function CreateNote() {
 
 
     return (
-        <>
+        <main>
             <h1>FormNotes</h1>
-            <NoteForm />
-        </>
+            <CreateNoteClient />
+        </main>
     );
 };

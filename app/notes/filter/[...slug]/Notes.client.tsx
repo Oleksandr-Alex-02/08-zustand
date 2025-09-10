@@ -60,9 +60,9 @@ export default function App({ searchParams }: AppProps) {
                         onPageChange={setCurrentPage}
                     />
                 )}
-                <button className={css.button} >
-                    <Link href="/notes/action/create">Creact</Link>
-                </button>
+                <Link href="/notes/action/create">
+                    <button className={css.button} >Creact</button>
+                </Link>
 
             </header>
 
