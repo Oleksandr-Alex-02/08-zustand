@@ -6,7 +6,7 @@ export interface NoteData {
     notes: Note[];
     totalPages: number;
 }
-const NOTEHUB_TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
+const NOTEHUB_TOKEN = process.env.VITE_TMDB_TOKEN;
 axios.defaults.baseURL = "https://notehub-public.goit.study/api";
 
 export const fetchNotes = async (
