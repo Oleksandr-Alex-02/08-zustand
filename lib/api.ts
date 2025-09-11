@@ -67,20 +67,20 @@ export const createNote = async (noteData: NoteFormType) => {
     return res.data;
 }
 // Фільтрація за категоріями
-// export const getCategories = async (
-//     tag?: string
-// ): Promise<Note[]> => {
-//     const res = await axios.get<NoteData>('/notes', {
-//         params: {
-//             tag,
-//         },
-//         headers: {
-//             accept: "application/json",
-//             Authorization: `Bearer ${NOTEHUB_TOKEN}`,
-//         }
-//     });
-//     return res.data.notes;
-// };
+export const getCategories = async (
+    tag?: string
+): Promise<Note[]> => {
+    const res = await axios.get<NoteData>('/notes', {
+        params: {
+            tag,
+        },
+        headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${NOTEHUB_TOKEN}`,
+        }
+    });
+    return res.data.notes;
+};
 
 
 // interface NoteUpdate {

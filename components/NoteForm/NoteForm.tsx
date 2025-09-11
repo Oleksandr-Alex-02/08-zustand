@@ -9,6 +9,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useStore } from '@/lib/store/noteStore';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { createNote } from '@/lib/api';
 import { NoteFormType } from '@/types/note';
 
@@ -26,6 +27,7 @@ const validationForm = Yup.object().shape({
 export default function NoteForm() {
     const fieldId = useId();
     const router = useRouter();
+    const queryClient = useQueryClient();
 
     const { draft, setDraft, clearDraft } = useStore();
     const [errors, setErrors] = useState<Partial<Record<keyof NoteFormType, string>>>({});
@@ -34,6 +36,7 @@ export default function NoteForm() {
         mutationFn: (noteData: NoteFormType) => createNote(noteData),
         onSuccess: () => {
             clearDraft();
+            queryClient.invalidateQueries({ queryKey: ['notes'] });
             router.push('/notes/filter/All');
         },
     });
