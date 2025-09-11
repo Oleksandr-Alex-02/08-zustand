@@ -14,7 +14,7 @@ import SearchBox from "@/components/SearchBox/SearchBox";
 
 interface AppProps {
     searchParams: {
-        name: string;
+        // notes: string;
         search: string;
         initPage: number;
         perPage?: number;
@@ -23,7 +23,7 @@ interface AppProps {
 }
 
 export default function App({ searchParams }: AppProps) {
-    const { name, search, initPage, perPage, tag } = searchParams;
+    const { search, initPage, perPage, tag } = searchParams;
 
     const [inputValue, setInputValue] = useState<string>(search);
     const [searchQuery, setSearchQuery] = useState<string>(search);
@@ -35,7 +35,7 @@ export default function App({ searchParams }: AppProps) {
     }, 1000);
 
     const { data, isLoading, isError } = useQuery({
-        queryKey: [name, searchQuery, currentPage, tag],
+        queryKey: [searchQuery, currentPage, tag],
         queryFn: () => fetchNotes(currentPage, searchQuery, perPage, tag),
         placeholderData: keepPreviousData,
         refetchOnMount: false,
@@ -61,7 +61,7 @@ export default function App({ searchParams }: AppProps) {
                     />
                 )}
                 <Link href="/notes/action/create">
-                    <button className={css.button} >Creact</button>
+                    <button className={css.button} >Create</button>
                 </Link>
 
             </header>

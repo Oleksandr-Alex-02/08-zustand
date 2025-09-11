@@ -34,16 +34,16 @@ export default async function App({ params }: Props) {
 
     const queryClient: QueryClient = new QueryClient()
     const qp = {
-        name: "notes",
+        notes: "notes",
         search: "",
         initPage: Number(1),
         perPage: Number(12),
         tag: slug[0] === "All" ? undefined : slug[0]
     };
-    const { name, search, initPage, perPage, tag } = qp
+    const { notes, search, initPage, perPage, tag } = qp
 
     await queryClient.prefetchQuery({
-        queryKey: [name, search, initPage, tag],
+        queryKey: [notes, search, initPage, tag],
         queryFn: () => fetchNotes(initPage, search, perPage, tag)
     })
     return (
