@@ -13,14 +13,14 @@ export const fetchNotes = async (
     currentPage: number,
     searchQuery: string,
     perPage?: number,
-    // tag?: string
+    tag?: string
 ): Promise<NoteData> => {
     const response = await axios.get<NoteData>("/notes", {
         params: {
             search: searchQuery,
             page: currentPage,
             perPage,
-            // tag,
+            tag,
         },
         headers: {
             accept: "application/json",
@@ -67,20 +67,20 @@ export const createNote = async (noteData: NoteFormType) => {
     return res.data;
 }
 // Фільтрація за категоріями
-export const getCategories = async (
-    tag?: string
-): Promise<Note[]> => {
-    const res = await axios.get<NoteData>('/notes', {
-        params: {
-            tag,
-        },
-        headers: {
-            accept: "application/json",
-            Authorization: `Bearer ${NOTEHUB_TOKEN}`,
-        }
-    });
-    return res.data.notes;
-};
+// export const getCategories = async (
+//     tag?: string
+// ): Promise<Note[]> => {
+//     const res = await axios.get<NoteData>('/notes', {
+//         params: {
+//             tag,
+//         },
+//         headers: {
+//             accept: "application/json",
+//             Authorization: `Bearer ${NOTEHUB_TOKEN}`,
+//         }
+//     });
+//     return res.data.notes;
+// };
 
 
 // interface NoteUpdate {

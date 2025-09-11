@@ -36,7 +36,7 @@ export default function App({ searchParams }: AppProps) {
 
     const { data, isLoading, isError } = useQuery({
         queryKey: [name, searchQuery, currentPage, tag],
-        queryFn: () => fetchNotes(currentPage, searchQuery, perPage),
+        queryFn: () => fetchNotes(currentPage, searchQuery, perPage, tag),
         placeholderData: keepPreviousData,
         refetchOnMount: false,
     });

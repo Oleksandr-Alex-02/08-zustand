@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: `CreateNote`,
         description: `Create your note with NOTEHUB`,
-        url: `https://notehub.com/notes`,
+        url: `https://notehub.com/notes/action/create`,
         images: [
             {
                 url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
@@ -25,7 +25,7 @@ export default async function CreateNote() {
 
     return (
         <main>
-            <h1>FormNotes</h1>
+            <h1>Create a new note</h1>
             <CreateNoteClient />
         </main>
     );

@@ -12,18 +12,18 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params
     return {
-        title: `Note: ${slug}`,
-        description: `Filter ${slug}`,
+        title: `Note: ${slug[0]}`,
+        description: `Filter ${slug[0]}`,
         openGraph: {
-            title: `Note; ${slug}`,
-            description: `Filter ${slug}`,
-            url: `https://notehub.com/notes/filter/${slug}`,
+            title: `Note: ${slug[0]}`,
+            description: `Filter ${slug[0]}`,
+            url: `https://notehub.com/notes/filter/${slug[0]}`,
             images: [
                 {
                     url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
                     width: 1200,
                     height: 630,
-                    alt: `Filter ${slug}`,
+                    alt: `Filter ${slug[0]}`,
                 },],
         }
     }
@@ -44,7 +44,7 @@ export default async function App({ params }: Props) {
 
     await queryClient.prefetchQuery({
         queryKey: [name, search, initPage, tag],
-        queryFn: () => fetchNotes(initPage, search, perPage)
+        queryFn: () => fetchNotes(initPage, search, perPage, tag)
     })
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
