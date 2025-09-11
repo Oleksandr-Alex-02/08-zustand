@@ -72,5 +72,3 @@ export default function App({ searchParams }: AppProps) {
         </div>
     );
 }
-
-//ddddfff
