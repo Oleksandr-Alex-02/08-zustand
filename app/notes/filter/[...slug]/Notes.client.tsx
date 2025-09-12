@@ -5,29 +5,23 @@ import css from "./page.module.css";
 import Link from "next/link";
 import { useState } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { fetchNotes } from "@/lib/api";
+import { getCategories, NoteData } from "@/lib/api";
 import { useDebouncedCallback } from "use-debounce";
 
 import NoteList from "@/components/NoteList/NoteList";
 import Pagination from "@/components/Pagination/Pagination";
 import SearchBox from "@/components/SearchBox/SearchBox";
+import { useParams } from "next/navigation";
+import { Note } from "@/types/note";
 
-interface AppProps {
-    searchParams: {
-        // notes: string;
-        search: string;
-        initPage: number;
-        perPage?: number;
-        tag?: string;
-    };
-}
 
-export default function App({ searchParams }: AppProps) {
-    const { search, initPage, perPage, tag } = searchParams;
+export default function App() {
 
-    const [inputValue, setInputValue] = useState<string>(search);
-    const [searchQuery, setSearchQuery] = useState<string>(search);
-    const [currentPage, setCurrentPage] = useState<number>(initPage);
+    const { tag } = useParams<{ tag: string }>();
+
+    const [inputValue, setInputValue] = useState<string>();
+    const [searchQuery, setSearchQuery] = useState<string>();
+    const [currentPage, setCurrentPage] = useState<number>();
 
     const debouncedSetSearchQuery = useDebouncedCallback((value: string) => {
         setSearchQuery(value);
@@ -35,13 +29,14 @@ export default function App({ searchParams }: AppProps) {
     }, 1000);
 
     const { data, isLoading, isError } = useQuery({
-        queryKey: [searchQuery, currentPage, tag],
-        queryFn: () => fetchNotes(currentPage, searchQuery, perPage, tag),
+        queryKey: ["notes", searchQuery, currentPage, tag],
+        queryFn: () => getCategories(tag),
         placeholderData: keepPreviousData,
         refetchOnMount: false,
     });
 
-    const totalPages = data?.totalPages || 0;
+    console.log(data)
+    const totalPages = data?.length || 0;
 
     return (
         <div className={css.app}>
@@ -68,7 +63,7 @@ export default function App({ searchParams }: AppProps) {
 
             {searchQuery && isLoading && !data && <>Loading notes...</>}
             {searchQuery && isError && <>Error occurred</>}
-            {data && data.notes.length > 0 && <NoteList notes={data.notes} />}
+            {data && data.length > 0 && <NoteList notes={data} />}
         </div>
     );
 }

@@ -40,15 +40,15 @@ export default async function App({ params }: Props) {
         perPage: Number(12),
         tag: slug[0] === "All" ? undefined : slug[0]
     };
-    const { notes, search, initPage, perPage, tag } = qp
+    const { search, initPage, perPage, tag } = qp
 
     await queryClient.prefetchQuery({
-        queryKey: [notes, search, initPage, tag],
+        queryKey: ["notes", search, initPage, tag],
         queryFn: () => fetchNotes(initPage, search, perPage, tag)
     })
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
-            <Notes searchParams={qp} />
+            <Notes />
         </HydrationBoundary>
     )
 }
