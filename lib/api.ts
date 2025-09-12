@@ -10,15 +10,15 @@ const NOTEHUB_TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 axios.defaults.baseURL = "https://notehub-public.goit.study/api";
 
 export const fetchNotes = async (
-    currentPage: number,
-    searchQuery: string,
+    search: string,
+    page: number,
     perPage?: number,
-    tag?: string
+    tag?: string// = "Todo"
 ): Promise<NoteData> => {
     const response = await axios.get<NoteData>("/notes", {
         params: {
-            search: searchQuery,
-            page: currentPage,
+            search,
+            page,
             perPage,
             tag,
         },
@@ -30,6 +30,7 @@ export const fetchNotes = async (
 
     return response.data;
 };
+
 // Нотатка по ID
 export const getIdNotes = async (noteId: string) => {
     const res = await axios.get<Note>(
