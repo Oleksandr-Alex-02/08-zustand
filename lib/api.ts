@@ -13,7 +13,7 @@ export const fetchNotes = async (
     search: string,
     page: number,
     perPage?: number,
-    tag?: string// = "Todo"
+    tag?: string,
 ): Promise<NoteData> => {
     const response = await axios.get<NoteData>("/notes", {
         params: {

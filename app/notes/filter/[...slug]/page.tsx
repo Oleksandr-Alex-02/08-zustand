@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Notes({ params }: Props) {
     const { slug } = await params;
+
     const qc: QueryClient = new QueryClient()
     const qp = {
         name: "notes",
@@ -40,14 +41,18 @@ export default async function Notes({ params }: Props) {
         tag: slug[0] === "All" ? undefined : slug[0]
     };
     const { name, search, initPage, perPage, tag } = qp
+    const tagNote = slug[0] === "All" ? undefined : slug[0] as "Todo" | "Work" | "Personal" | "Meeting" | "Shopping" | undefined;
 
     await qc.prefetchQuery({
-        queryKey: [name, search, initPage, tag],
-        queryFn: () => fetchNotes(search, initPage, perPage, tag)
+        queryKey: ["notes", name, search, initPage, tag],
+        queryFn: () => fetchNotes(search, initPage, perPage, tag),
     })
+
+    console.log(slug[0])
+
     return (
         <HydrationBoundary state={dehydrate(qc)}>
-            <NotesClient searchParams={qp} />
+            <NotesClient category={tagNote} />
         </HydrationBoundary>
     )
 }
